@@ -142,7 +142,7 @@ function Scheduler:setlink(a, b, level)
     expect(1, a, "string")
     expect(2, b, "string")
     expect(3, level, "number")
-    return self:condition("railways:redstone_link",
+    return self:entry("railways:redstone_link",
         { frequency = { { id = a, count = 1 }, { id = b, count = 1 } }, power = level })
 end
 
