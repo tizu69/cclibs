@@ -35,7 +35,7 @@ schedule = {
               rotation = 0,
               hour = 14,
               minute = 0,
-} } } } } } }
+              -- ...
 ```
 
 Well, what if it were like this?
