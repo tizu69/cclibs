@@ -54,6 +54,7 @@ Now it is! Full autocomplete and documentation included.
 -   Create
 -   Create Steam 'n' Rails
 -   Create Crafts & Additions
+-   Create Railways Navigator
 -   .. easily extensible!
 
 ## Download
