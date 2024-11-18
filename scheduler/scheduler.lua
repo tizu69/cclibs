@@ -27,6 +27,14 @@ local valid_intervals = {
 --- @field ctx { station: number, condition: number }
 local Scheduler = {}
 
+--- A utility helper to make code more readable.
+--- Should be used as the "any item/fluid" placeholder.
+--- ```lua
+--- s:item(Scheduler.any, "<", 64)
+---  :fluid(Scheduler.any, ">", 200)
+--- ```
+Scheduler.any = "minecraft:air"
+
 --- Create new Scheduler
 --- @param data boolean|Scheduler If the schedule should be cyclic, or Scheduler table.
 --- @return Scheduler
