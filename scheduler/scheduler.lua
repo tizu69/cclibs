@@ -213,7 +213,7 @@ function Scheduler:item(item, operator, threshold)
 	expect(2, operator, "string")
 	expect(3, threshold, "number")
 	return self:condition("create:item_threshold",
-		{ bucket = { id = item, count = 1 }, threshold = threshold, operator = valid_comparison[operator], measure = 0 })
+		{ bucket = { id = item, count = 1 }, threshold = tostring(threshold), operator = valid_comparison[operator], measure = 0 })
 end
 
 --- Wait for a redstone link to be powered.
