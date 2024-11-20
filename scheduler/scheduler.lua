@@ -209,7 +209,7 @@ function Scheduler:fluid(item, operator, threshold)
 	expect(2, operator, "string")
 	expect(3, threshold, "number")
 	return self:condition("create:fluid_threshold",
-		{ bucket = { id = item, count = 1 }, threshold = threshold, operator = valid_comparison[operator], measure = 0 })
+		{ bucket = { id = item, count = 1 }, threshold = tostring(threshold), operator = valid_comparison[operator], measure = 0 })
 end
 
 --- Wait for a certain amount of a specific item to be loaded onto the train.
