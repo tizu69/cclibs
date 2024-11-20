@@ -24,7 +24,6 @@ local valid_intervals = {
 --- @class Scheduler
 --- @field cyclic boolean
 --- @field entries table
---- @field ctx { station: number, condition: number }
 local Scheduler = {}
 
 --- A utility helper to make code more readable.
@@ -63,8 +62,26 @@ Scheduler.any = "minecraft:air"
 function Scheduler.new(data)
 	expect(1, data, "boolean", "table")
 	local initial = type(data) == "boolean" and { cyclic = data, entries = {} } or data --[[@as table]]
-	initial.ctx = initial.ctx or { station = 0, condition = 0 }
-	return setmetatable(initial, { __index = Scheduler })
+	-- deep copy initial.ctx if it exists because pointing a metatable
+	-- towards a table that was created and interacted with outside
+	-- our view doesn't seem like a good idea
+	local station, condition = 0, 0
+	if initial.ctx then
+		station, condition = initial.ctx.station, initial.ctx.condition
+	end
+	-- create a double metatable system where intial.__index points
+	-- to context_wrapper and then context_wrapper.__index points
+	-- to Scheduler
+	--
+	-- This way initial.ctx can be written to and it's state kept
+	-- seperate from other schedules, but it won't be read by
+	-- station.getSchedule() (which would break things)
+	local context_wrapper = setmetatable(
+		{ ctx = { station = station, condition = condition } },
+		{ __index = Scheduler }
+	)
+	initial =  setmetatable(initial, { __index = context_wrapper })
+	return initial
 end
 
 --- Append a generic station entry.
