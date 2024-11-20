@@ -67,8 +67,18 @@ Scheduler.any = "minecraft:air"
 function Scheduler.new(data)
 	expect(1, data, "boolean", "table")
 	local initial = type(data) == "boolean" and { cyclic = data, entries = {} } or data --[[@as table]]
-	initial.ctx = initial.ctx or { station = 0, condition = 0 }
-	return setmetatable(initial, { __index = Context })
+	local station, condition = 0, 0
+	if initial.ctx then
+		station, condition = initial.ctx.station, initial.ctx.condition
+	end
+	local context = setmetatable(
+		{ ctx = {
+			station = station, condition = condition}
+		},
+		{ __index = Scheduler }
+	)
+	initial =  setmetatable(initial, { __index = context })
+	return initial
 end
 
 --- Append a generic station entry.
