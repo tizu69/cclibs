@@ -24,8 +24,12 @@ local valid_intervals = {
 --- @class Scheduler
 --- @field cyclic boolean
 --- @field entries table
---- @field ctx { station: number, condition: number }
 local Scheduler = {}
+
+--- @class Context
+--- @field station number
+--- @field condition number
+local Context = setmetatable({}, Scheduler)
 
 --- A utility helper to make code more readable.
 --- Should be used as the "any item/fluid" placeholder.
@@ -64,7 +68,7 @@ function Scheduler.new(data)
 	expect(1, data, "boolean", "table")
 	local initial = type(data) == "boolean" and { cyclic = data, entries = {} } or data --[[@as table]]
 	initial.ctx = initial.ctx or { station = 0, condition = 0 }
-	return setmetatable(initial, { __index = Scheduler })
+	return setmetatable(initial, { __index = Context })
 end
 
 --- Append a generic station entry.
