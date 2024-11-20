@@ -26,11 +26,6 @@ local valid_intervals = {
 --- @field entries table
 local Scheduler = {}
 
---- @class Context
---- @field station number
---- @field condition number
-local Context = setmetatable({}, Scheduler)
-
 --- A utility helper to make code more readable.
 --- Should be used as the "any item/fluid" placeholder.
 --- ```lua
