@@ -19,7 +19,8 @@ jobs:
               run: npm install -g luamin
             - name: Minify files
               run: |
-                  cat scheduler/scheduler.lua | luamin -c > scheduler/schedulermin.lua
+                  cat scheduler/scheduler.lua | luamin -c > scheduler/schedulermin.lua &&
+                  cat go/go.lua | luamin -c > go/gomin.lua
             - name: Push changes
               uses: EndBug/add-and-commit@v9
               with:
