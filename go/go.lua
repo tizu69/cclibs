@@ -28,6 +28,7 @@ return function(pull, catcher)
 
     if #goroutines == 0 then error("No goroutines to run") end
 
+    os.queueEvent("go:start")
     while true do
         local ev = { pull() }
         for id = #goroutines, 1, -1 do
