@@ -274,7 +274,7 @@ local function tryTests(schedulername)
 					data = {
 						operator = 0,
 						measure = 0,
-						threshold = 5,
+						threshold = "5",
 						bucket = {
 							id = "minecraft:water_bucket",
 							count = 1
@@ -285,7 +285,7 @@ local function tryTests(schedulername)
 					data = {
 						operator = 1,
 						measure = 0,
-						threshold = 100,
+						threshold = "100",
 						bucket = {
 							id = "minecraft:iron_ingot",
 							count = 1
@@ -364,7 +364,7 @@ local function tryTests(schedulername)
 					data = {
 						operator = 0,
 						measure = 0,
-						threshold = 5,
+						threshold = "5",
 						bucket = {
 							id = "minecraft:water_bucket",
 							count = 1
@@ -375,7 +375,7 @@ local function tryTests(schedulername)
 					data = {
 						operator = 1,
 						measure = 0,
-						threshold = 100,
+						threshold = "100",
 						bucket = {
 							id = "minecraft:iron_ingot",
 							count = 1
