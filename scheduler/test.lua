@@ -8,7 +8,7 @@ local function tryTests(schedulername)
 			print(schedulername .. ": Passed: " .. name)
 		else
 			local errmsg = schedulername .. ": Failed test!! - " .. name ..
-				"\nGot: " .. inp .. "\nExpected: " .. out .. "\n"
+				 "\nGot: " .. inp .. "\nExpected: " .. out .. "\n"
 			local f = fs.open("test.err", "w")
 			f.write(errmsg)
 			f.close()
@@ -213,34 +213,36 @@ local function tryTests(schedulername)
 		local s = Scheduler.new(true)
 
 		s:to("Main Station")
-			:wait(10, "m")
-			:OR():time(14, 30, "hourly")
-			:OR():fluid("minecraft:water_bucket", ">", 5)
-			:OR():item("minecraft:iron_ingot", "<", 100)
-			:OR():getlink("minecraft:red_wool", "minecraft:red_wool", true)
-			:OR():passengers("=", 2)
-			:OR():cargoidle(15, "s")
-			:OR():unloaded()
-			:OR():powered()
-			:OR():loaded()
-			:OR():waitdynamic(10, 5, "s")
-			:OR():energy(">", 1000)
+			 :wait(10, "m")
+			 :OR():time(14, 30, "hourly")
+			 :OR():fluid("minecraft:water_bucket", ">", 5)
+			 :OR():item("minecraft:iron_ingot", "<", 100)
+			 :OR():getlink("minecraft:red_wool", "minecraft:red_wool", true)
+			 :OR():passengers("=", 2)
+			 :OR():cargoidle(15, "s")
+			 :OR():unloaded()
+			 :OR():powered()
+			 :OR():loaded()
+			 :OR():waitdynamic(10, 5, "s")
+			 :OR():energy(">", 1000)
 
 		s:to("AND Station")
-			:wait(10, "m")
-			:time(14, 30, "hourly")
-			:fluid("minecraft:water_bucket", ">", 5)
-			:item("minecraft:iron_ingot", "<", 100)
-			:getlink("minecraft:red_wool", "minecraft:red_wool", true)
-			:passengers("=", 2)
-			:cargoidle(15, "s")
-			:unloaded()
-			:powered()
-			:loaded()
-			:waitdynamic(10, 5, "s")
-			:energy(">", 1000)
+			 :wait(10, "m")
+			 :time(14, 30, "hourly")
+			 :fluid("minecraft:water_bucket", ">", 5)
+			 :item("minecraft:iron_ingot", "<", 100)
+			 :getlink("minecraft:red_wool", "minecraft:red_wool", true)
+			 :passengers("=", 2)
+			 :cargoidle(15, "s")
+			 :unloaded()
+			 :powered()
+			 :loaded()
+			 :waitdynamic(10, 5, "s")
+			 :energy(">", 1000)
 
 		s:rename("Express Line")
+		s:deliverPackage()
+		s:fetchPackage("addr")
 		s:section("Group A", "Line 1", true, true)
 		s:throttle(75)
 		s:through("Next Station")
@@ -434,6 +436,20 @@ local function tryTests(schedulername)
 					id = "create:rename",
 					data = {
 						text = "Express Line"
+					}
+				},
+				conditions = {}
+			}, {
+				instruction = {
+					id = "create:package_delivery",
+					data = {}
+				},
+				conditions = {}
+			}, {
+				instruction = {
+					id = "create:package_retrieval",
+					data = {
+						text = "addr"
 					}
 				},
 				conditions = {}
